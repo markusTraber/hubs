@@ -194,3 +194,18 @@ export const NetworkDebug = defineComponent();
 export const NetworkDebugRef = defineComponent({
   ref: Types.eid
 });
+
+export const VirtualButton = defineComponent({
+  isPlaying: Types.ui8,
+  id: Types.ui32,
+  loopType: Types.ui8
+});
+VirtualButton.id[$isStringType] = true;
+VirtualButton.loopType[$isStringType] = true;
+export const NetworkedVirtualButton = defineComponent({
+  isPlaying: Types.ui8,
+  id: Types.ui32,
+  loopType: Types.ui8
+});
+NetworkedVirtualButton.id[$isStringType] = true;
+VirtualButton.loopType[$isStringType] = true;

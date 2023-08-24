@@ -607,3 +607,22 @@ AFRAME.GLTFModelPlus.registerComponent("reflection-probe", "reflection-probe", (
 
   el.setAttribute(componentName, componentData);
 });
+
+AFRAME.GLTFModelPlus.registerComponent("virtual-btn", "virtual-btn", (el, _componentName, componentData) => {
+  const eid = renderAsEntity(APP.world, <entity name="virtual-btn" virtual-btn={componentData} />);
+
+  addComponent(APP.world, Networked, eid);
+  const networkedEl = findAncestorWithComponent(el, "networked");
+  const rootNid = (networkedEl && networkedEl.components.networked.data.networkId) || "scene";
+  Networked.id[eid] = APP.getSid(`${rootNid}.${el.object3D.children[0].userData.gltfIndex}`);
+  APP.world.nid2eid.set(Networked.id[eid], eid);
+
+  // move mesh to entity
+  const entity = APP.world.eid2obj.get(eid);
+  const mesh = el.object3D.children[0];
+  entity.add(mesh);
+  el.object3D.children = []; // remove mesh from el
+
+  // add entity to el
+  el.object3D.add(entity);
+});

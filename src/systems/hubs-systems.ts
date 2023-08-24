@@ -59,6 +59,7 @@ import { EffectComposer } from "postprocessing";
 import { sceneLoadingSystem } from "../bit-systems/scene-loading";
 import { networkDebugSystem } from "../bit-systems/network-debug";
 import qsTruthy from "../utils/qs_truthy";
+import { virtualButtonSystem } from "../bit-systems/virtual-button-system";
 
 declare global {
   interface Window {
@@ -216,6 +217,7 @@ export function mainTick(xrFrame: XRFrame, renderer: WebGLRenderer, scene: Scene
   hubsSystems.inspectYourselfSystem.tick(hubsSystems.el, aframeSystems.userinput, hubsSystems.cameraSystem);
   hubsSystems.cameraSystem.tick(hubsSystems.el, dt);
   cameraToolSystem(world);
+  virtualButtonSystem(world);
   hubsSystems.waypointSystem.tick(t, dt);
   hubsSystems.menuAnimationSystem.tick(t);
   hubsSystems.spriteSystem.tick(t, dt);

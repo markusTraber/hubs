@@ -41,6 +41,7 @@ import { inflateVideo } from "../inflators/video";
 import { inflateVideoLoader, VideoLoaderParams } from "../inflators/video-loader";
 import { inflateImageLoader, ImageLoaderParams } from "../inflators/image-loader";
 import { inflateModel, ModelParams } from "../inflators/model";
+import { inflateVirtualButton } from "../inflators/virtualButton";
 import { inflateSlice9 } from "../inflators/slice9";
 import { inflateText } from "../inflators/text";
 import { inflateEnvironmentSettings } from "../inflators/environment-settings";
@@ -285,6 +286,11 @@ export interface JSXComponentData extends ComponentData {
   object3D?: any;
   text?: any;
   model?: ModelParams;
+  "virtual-btn"?: {
+    isPlaying: boolean;
+    id: string;
+    loopType: "loop-repeat" | "loop-once" | "loop-pingpong";
+  };
   networkDebug?: boolean;
 }
 
@@ -357,7 +363,8 @@ const jsxInflators: Required<{ [K in keyof JSXComponentData]: InflatorFn }> = {
   text: inflateText,
   model: inflateModel,
   image: inflateImage,
-  video: inflateVideo
+  video: inflateVideo,
+  "virtual-btn": inflateVirtualButton
 };
 
 export const gltfInflators: Required<{ [K in keyof GLTFComponentData]: InflatorFn }> = {
