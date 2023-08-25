@@ -155,6 +155,7 @@ export const SCHEMA = {
         audioClippingThreshold: { type: "number", default: 0.015 },
         audioPanningQuality: { type: "string", default: defaultAudioPanningQuality() },
         theme: { type: "string", default: undefined },
+        themePerScenePreviousValue: { type: "string", default: undefined },
         cursorSize: { type: "number", default: 1 },
         nametagVisibility: { type: "string", default: "showAll" },
         nametagVisibilityDistance: { type: "number", default: 5 },
@@ -321,12 +322,25 @@ export default class Store extends EventTarget {
     if (!this.state.activity.hasChangedName) {
       this.update({ profile: { displayName: generateRandomName() } });
     }
+
+    // restore previous theme if has been change by scene
+    this.restoreOriginalThemePreferences();
   };
 
   resetToRandomDefaultAvatar = async () => {
     this.update({
       profile: { ...(this.state.profile || {}), avatarId: await fetchRandomDefaultAvatarId() }
     });
+  };
+
+  restoreOriginalThemePreferences = async () => {
+    if (this.state.preferences.themePerScenePreviousValue) {
+      const prev =
+        this.state.preferences.themePerScenePreviousValue === "undefined"
+          ? undefined
+          : this.state.preferences.themePerScenePreviousValue;
+      this.update({ preferences: { theme: prev, themePerScenePreviousValue: undefined } });
+    }
   };
 
   get state() {
