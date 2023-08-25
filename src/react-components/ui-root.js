@@ -69,6 +69,7 @@ import { ReactComponent as VRIcon } from "./icons/VR.svg";
 import { ReactComponent as LeaveIcon } from "./icons/Leave.svg";
 import { ReactComponent as EnterIcon } from "./icons/Enter.svg";
 import { ReactComponent as InviteIcon } from "./icons/Invite.svg";
+import { ReactComponent as InfoIcon } from "./icons/Info.svg";
 import { PeopleSidebarContainer, userFromPresence } from "./room/PeopleSidebarContainer";
 import { ObjectListProvider } from "./room/useObjectList";
 import { ObjectsSidebarContainer } from "./room/ObjectsSidebarContainer";
@@ -79,6 +80,7 @@ import { SharePopoverContainer } from "./room/SharePopoverContainer";
 import { AudioPopoverContainer } from "./room/AudioPopoverContainer";
 import { ReactionPopoverContainer } from "./room/ReactionPopoverContainer";
 import { SafariMicModal } from "./room/SafariMicModal";
+import { IFrameIntroductionModal } from "./room/IFrameIntroductionModal";
 import { RoomSignInModalContainer } from "./auth/RoomSignInModalContainer";
 import { SignInStep } from "./auth/SignInModal";
 import { LeaveReason, LeaveRoomModal } from "./room/LeaveRoomModal";
@@ -643,6 +645,14 @@ class UIRoot extends Component {
 
     if (this.mediaDevicesManager.isVideoShared) {
       console.log("Screen sharing enabled.");
+    }
+
+    // ternaty introduction modal (via iframe)
+    if (APP.introModalSettings && !this.props.store.state.preferences.skipIframeIntroductionModal) {
+      this.showNonHistoriedDialog(IFrameIntroductionModal, {
+        scene: this.props.scene,
+        store: this.props.store
+      });
     }
   };
 
@@ -1612,6 +1622,21 @@ class UIRoot extends Component {
                     <ChatToolbarButtonContainer
                       onClick={() => this.toggleSidebar("chat", { chatPrefix: "", chatAutofocus: false })}
                     />
+                    {entered && (APP.introModalSettings ? true : false) && (
+                      <ToolbarButton
+                        icon={<InfoIcon />}
+                        label={
+                          <FormattedMessage id="toolbar.iframe-introduction-modal" defaultMessage="Introduction" />
+                        }
+                        preset="accent3"
+                        onClick={() => {
+                          this.showNonHistoriedDialog(IFrameIntroductionModal, {
+                            //scene: this.props.scene,
+                            store: this.props.store
+                          });
+                        }}
+                      />
+                    )}
                     {entered && isMobileVR && (
                       <ToolbarButton
                         className={styleUtils.hideLg}

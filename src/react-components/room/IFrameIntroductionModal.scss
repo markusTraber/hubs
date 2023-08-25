@@ -1,0 +1,65 @@
+@use "../styles/theme.scss";
+
+:local(.modal) {
+  max-width: 1000px;
+
+  @media(max-width: theme.$breakpoint-lg - 1),
+  (max-height: theme.$breakpoint-vr - 1) {
+    max-width: none;
+  }
+}
+
+:local(.content) {
+  flex: 1;
+  min-height: 65vh;
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+
+    .checkbox {
+      cursor: pointer;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      width: 1em;
+      height: 1em;
+      border: 1px solid theme.$input-border-color;
+      background-color: theme.$input-bg-color;
+      border-radius: 3px;
+      vertical-align: sub;
+      margin: 0 0.5em;
+      min-width: 1em;
+      min-height: 1em;
+    }
+
+    .checkbox:checked {
+      position: relative;
+
+      &::after {
+        content: ' ';
+        position: absolute;
+        background: theme.$active-color;
+        top: 0.13em;
+        left: 0.13em;
+        right: 0.12em;
+        bottom: 0.12em;
+        border-radius: 0.15em;
+      }
+    }
+
+    label {
+      font-size: 14px;
+    }
+  }
+}
+
+:local(.iframe) {
+  width: 100%;
+
+  //min-height: 630px;
+  // max-height: 100%;
+  border: 0;
+  flex: 1;
+}

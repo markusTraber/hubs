@@ -607,3 +607,7 @@ AFRAME.GLTFModelPlus.registerComponent("reflection-probe", "reflection-probe", (
 
   el.setAttribute(componentName, componentData);
 });
+
+AFRAME.GLTFModelPlus.registerComponent("intro-modal", "intro-modal", (el, componentName, componentData) => {
+  APP.introModalSettings = componentData;
+});

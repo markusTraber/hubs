@@ -161,7 +161,8 @@ export const SCHEMA = {
         avatarVoiceLevels: { type: "object" },
         enablePostEffects: { type: "bool", default: false },
         enableBloom: { type: "bool", default: true }, // only applies if post effects are enabled
-        aaMode: { type: "string", default: AAModes.MSAA_4X } // only applies if post effects are enabled
+        aaMode: { type: "string", default: AAModes.MSAA_4X }, // only applies if post effects are enabled
+        skipIframeIntroductionModal: { type: "bool", default: false }
       }
     },
 
