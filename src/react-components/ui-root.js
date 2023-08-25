@@ -647,7 +647,7 @@ class UIRoot extends Component {
       console.log("Screen sharing enabled.");
     }
 
-    // ternaty introduction modal (via iframe)
+    // introduction modal (via iframe)
     if (APP.introModalSettings && !this.props.store.state.preferences.skipIframeIntroductionModal) {
       this.showNonHistoriedDialog(IFrameIntroductionModal, {
         scene: this.props.scene,
