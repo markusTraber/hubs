@@ -1,0 +1,17 @@
+@use "../styles/theme.scss";
+
+:local(.content) {
+    flex: 1;
+}
+
+:local(.notice) {
+    flex-basis: min-content;
+}
+
+:local(.iframe) {
+    width: 100%;
+    min-height: 630px;
+    // max-height: 100%;
+    border: 0;
+    flex: 1;
+}

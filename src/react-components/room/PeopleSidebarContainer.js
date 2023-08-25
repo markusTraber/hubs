@@ -113,6 +113,7 @@ export function PeopleSidebarContainer({
           history={history}
           showBackButton
           onBack={() => setSelectedPersonId(null)}
+          showNonHistoriedDialog={showNonHistoriedDialog}
         />
       );
     } else {

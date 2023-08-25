@@ -184,3 +184,18 @@
     color: theme.$tile-text-color;
   }
 }
+
+// Styling for rpm tile
+:local(.tall) :local(.thumbnail-container),
+:local(.wide) :local(.thumbnail-container) {
+  :local(.rpm-tile-content) {
+    padding-bottom: 20px;
+
+    img {
+      position: relative;
+      width: 90%;
+      object-fit: contain;
+      margin-bottom: -20px; // revert padding from wrapper
+    }
+  }
+}

@@ -7,6 +7,11 @@
   text-align: center;
 }
 
+:local(.flex-wrapper) {
+  display: flex;
+  flex-direction: row;
+  gap: 10px 10px;
+}
 
 :local(.avatar-preview-container) {
   display: flex;
@@ -15,7 +20,7 @@
   align-items: center;
 
   /* TODO: This styling into AvatarPreview */
-  & > :first-child {
+  &> :first-child {
     /*
     We need to set dimensions explicitly here, since AvatarPreview
     resizes itself to its container's dimensions.
